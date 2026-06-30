@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Compliance &amp; Governance Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===================== TOAST CONTAINER ===================== -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ===================== MODAL OVERLAY ===================== -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal" id="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title"></h3>
+                <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer" id="modal-footer"></div>
+        </div>
+    </div>
+
+    <!-- ===================== AUTH: LOGIN ===================== -->
+    <div id="page-login" class="auth-page">
+        <div class="auth-container">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#FFE600"/><path d="M12 28V12h4l6 10 6-10h4v16h-4V18l-6 10-6-10v10h-4z" fill="#121212"/></svg>
+                </div>
+                <h1 class="auth-title">AI Compliance &amp; Governance Platform</h1>
+                <p class="auth-subtitle">Enterprise-grade audit readiness, assessment tracking, and regulatory compliance</p>
+            </div>
+            <div class="auth-card">
+                <h2 class="auth-card-title">Sign In</h2>
+                <p class="auth-card-subtitle">Access your compliance workspace</p>
+                <form id="login-form" class="auth-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="form-input" placeholder="you@organization.com" required autocomplete="email">
+                        <span class="form-error" id="login-email-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <div class="input-icon-wrap">
+                            <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
+                            <button type="button" class="input-icon-btn toggle-password" data-target="login-password" aria-label="Toggle password visibility">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                        </div>
+                        <span class="form-error" id="login-password-error"></span>
+                    </div>
+                    <div class="form-row form-row-between">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="login-remember" class="checkbox-input">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-text">Remember me</span>
+                        </label>
+                        <a href="#" class="form-link" id="login-forgot">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+                <div class="auth-divider"><span>OR</span></div>
+                <button class="btn btn-outline btn-full btn-google" id="btn-google-login">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    Sign in with Google
+                </button>
+                <p class="auth-footer-text">New to the platform? <a href="#" id="goto-register">Create an account</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== AUTH: REGISTRATION ===================== -->
+    <div id="page-register" class="auth-page hidden">
+        <div class="auth-container auth-container-wide">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#FFE600"/><path d="M12 28V12h4l6 10 6-10h4v16h-4V18l-6 10-6-10v10h-4z" fill="#121212"/></svg>
+                </div>
+                <h1 class="auth-title">AI Compliance &amp; Governance Platform</h1>
+                <p class="auth-subtitle">Begin your compliance journey</p>
+            </div>
+            <div class="auth-card auth-card-wide">
+                <h2 class="auth-card-title">Create Account</h2>
+                <p class="auth-card-subtitle">Register to access the platform</p>
+                <form id="register-form" class="auth-form" novalidate>
+                    <div class="form-section-title">Personal Information</div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="reg-fname">Full Name</label>
+                            <input type="text" id="reg-fname" class="form-input" placeholder="Dr. Jane Smith" required>
+                            <span class="form-error" id="reg-fname-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="reg-designation">Designation</label>
+                            <input type="text" id="reg-designation" class="form-input" placeholder="Chief Compliance Officer" required>
+                            <span class="form-error" id="reg-designation-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="reg-org">Organization</label>
+                            <input type="text" id="reg-org" class="form-input" placeholder="Acme Corp" required>
+                            <span class="form-error" id="reg-org-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="reg-mobile">Mobile Number</label>
+                            <input type="tel" id="reg-mobile" class="form-input" placeholder="+91 98765 43210" required>
+                            <span class="form-error" id="reg-mobile-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-section-title">Account Setup</div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="reg-email">Email Address</label>
+                            <input type="email" id="reg-email" class="form-input" placeholder="you@organization.com" required>
+                            <span class="form-error" id="reg-email-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="reg-role">Role</label>
+                            <select id="reg-role" class="form-input form-select" required>
+                                <option value="">Select Role</option>
+                                <option value="auditor">Auditor</option>
+                                <option value="auditee">Auditee</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                            <span class="form-error" id="reg-role-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="reg-password">Password</label>
+                            <input type="password" id="reg-password" class="form-input" placeholder="Min 8 characters" required>
+                            <span class="form-error" id="reg-password-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="reg-confirm">Confirm Password</label>
+                            <input type="password" id="reg-confirm" class="form-input" placeholder="Re-enter password" required>
+                            <span class="form-error" id="reg-confirm-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="reg-terms" class="checkbox-input" required>
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-text">I agree to the <a href="#" class="form-link">Terms of Service</a> and <a href="#" class="form-link">Privacy Policy</a></span>
+                        </label>
+                        <span class="form-error" id="reg-terms-error"></span>
+                    </div>
+                    <div class="form-row form-row-end">
+                        <button type="button" class="btn btn-outline" id="reg-draft">Save Draft</button>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+                <p class="auth-footer-text">Already have an account? <a href="#" id="goto-login">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== AUTH: FORGOT PASSWORD ===================== -->
+    <div id="page-forgot" class="auth-page hidden">
+        <div class="auth-container">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#FFE600"/><path d="M12 28V12h4l6 10 6-10h4v16h-4V18l-6 10-6-10v10h-4z" fill="#121212"/></svg>
+                </div>
+            </div>
+            <div class="auth-card">
+                <h2 class="auth-card-title">Reset Password</h2>
+                <p class="auth-card-subtitle">Enter your email to receive a reset link</p>
+                <form id="forgot-form" class="auth-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="forgot-email">Email Address</label>
+                        <input type="email" id="forgot-email" class="form-input" placeholder="you@organization.com" required>
+                        <span class="form-error" id="forgot-email-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Send Reset Link</button>
+                </form>
+                <p class="auth-footer-text"><a href="#" id="goto-login-from-forgot">Back to Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== ONBOARDING: AUDITOR ===================== -->
+    <div id="page-onboard-auditor" class="auth-page hidden">
+        <div class="auth-container auth-container-wide onboard-container">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#FFE600"/><path d="M12 28V12h4l6 10 6-10h4v16h-4V18l-6 10-6-10v10h-4z" fill="#121212"/></svg>
+                </div>
+                <h1 class="auth-title">Auditor Onboarding</h1>
+                <p class="auth-subtitle">Complete your auditor profile to begin assessments</p>
+            </div>
+            <div class="auth-card auth-card-wide">
+                <form id="auditor-onboard-form" class="auth-form" novalidate>
+                    <div class="onboard-progress">
+                        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+
+                    <div class="form-section-title">Professional Credentials</div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="ao-qual">Qualification</label>
+                            <select id="ao-qual" class="form-input form-select" required>
+                                <option value="">Select Qualification</option>
+                                <option>CA</option><option>CS</option><option>CMA</option>
+                                <option>CISA</option><option>CISM</option><option>CISSP</option>
+                                <option>LLB</option><option>PhD</option><option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ao-exp">Years of Experience</label>
+                            <input type="number" id="ao-exp" class="form-input" placeholder="e.g. 12" min="0" max="50" required>
+                        </div>
+                    </div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="ao-specialization">Specialization</label>
+                            <select id="ao-specialization" class="form-input form-select" required>
+                                <option value="">Select Specialization</option>
+                                <option>AI/ML Governance</option><option>Data Privacy</option>
+                                <option>Information Security</option><option>IT Audit</option>
+                                <option>Financial Audit</option><option>Regulatory Compliance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ao-cert">Certification ID</label>
+                            <input type="text" id="ao-cert" class="form-input" placeholder="e.g. CISA-12345">
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">Audit Frameworks Expertise</div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input" checked><span class="checkbox-custom"></span><span class="checkbox-text">EU AI Act</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input" checked><span class="checkbox-custom"></span><span class="checkbox-text">NIST AI RMF</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">ISO 42001</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">DPDP Act</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">MeitY Guidelines</span></label>
+                    </div>
+
+                    <div class="form-section-title">Additional Information</div>
+                    <div class="form-group">
+                        <label class="form-label" for="ao-bio">Professional Bio</label>
+                        <textarea id="ao-bio" class="form-input form-textarea" rows="3" placeholder="Brief professional summary..."></textarea>
+                    </div>
+
+                    <div class="form-row form-row-end">
+                        <button type="button" class="btn btn-outline" id="ao-draft">Save Draft</button>
+                        <button type="submit" class="btn btn-primary">Submit &amp; Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== ONBOARDING: AUDITEE ===================== -->
+    <div id="page-onboard-auditee" class="auth-page hidden">
+        <div class="auth-container auth-container-wide onboard-container">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#FFE600"/><path d="M12 28V12h4l6 10 6-10h4v16h-4V18l-6 10-6-10v10h-4z" fill="#121212"/></svg>
+                </div>
+                <h1 class="auth-title">Auditee Onboarding</h1>
+                <p class="auth-subtitle">Set up your organization profile for compliance assessment</p>
+            </div>
+            <div class="auth-card auth-card-wide">
+                <form id="auditee-onboard-form" class="auth-form" novalidate>
+                    <div class="onboard-progress">
+                        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+
+                    <div class="form-section-title">Organization Details</div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="ae-org-name">Organization Name</label>
+                            <input type="text" id="ae-org-name" class="form-input" placeholder="Acme Corporation" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ae-org-type">Organization Type</label>
+                            <select id="ae-org-type" class="form-input form-select" required>
+                                <option value="">Select Type</option>
+                                <option>Public Listed Company</option><option>Private Company</option>
+                                <option>Government Entity</option><option>PSU</option>
+                                <option>Startup</option><option>MNC</option><option>NGO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="ae-industry">Industry Sector</label>
+                            <select id="ae-industry" class="form-input form-select" required>
+                                <option value="">Select Industry</option>
+                                <option>Financial Services</option><option>Healthcare</option>
+                                <option>Technology</option><option>Manufacturing</option>
+                                <option>Telecom</option><option>Government</option>
+                                <option>Education</option><option>Retail</option><option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ae-size">Employee Size</label>
+                            <select id="ae-size" class="form-input form-select" required>
+                                <option value="">Select Size</option>
+                                <option>1 - 50</option><option>51 - 200</option>
+                                <option>201 - 1000</option><option>1001 - 5000</option>
+                                <option>5000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="ae-ai-systems">Number of AI Systems</label>
+                            <input type="number" id="ae-ai-systems" class="form-input" placeholder="e.g. 5" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ae-ai-domains">AI Application Domains</label>
+                            <input type="text" id="ae-ai-domains" class="form-input" placeholder="e.g. NLP, Computer Vision, Fraud Detection">
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">Compliance Scope</div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input" checked><span class="checkbox-custom"></span><span class="checkbox-text">EU AI Act Compliance</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">NIST AI RMF Assessment</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">ISO 42001 Certification</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">DPDP Act Compliance</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label"><input type="checkbox" class="checkbox-input"><span class="checkbox-custom"></span><span class="checkbox-text">MeitY Guidelines</span></label>
+                    </div>
+
+                    <div class="form-section-title">Point of Contact</div>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label class="form-label" for="ae-poc-name">Contact Person</label>
+                            <input type="text" id="ae-poc-name" class="form-input" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ae-poc-email">Contact Email</label>
+                            <input type="email" id="ae-poc-email" class="form-input" placeholder="email@org.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ae-poc-phone">Contact Phone</label>
+                        <input type="tel" id="ae-poc-phone" class="form-input" placeholder="+91 98765 43210">
+                    </div>
+
+                    <div class="form-row form-row-end">
+                        <button type="button" class="btn btn-outline" id="ae-draft">Save Draft</button>
+                        <button type="submit" class="btn btn-primary">Submit &amp; Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== MAIN APPLICATION SHELL ===================== -->
+    <div id="app-shell" class="app-shell hidden">
+
+        <!-- HEADER -->
+        <header class="app-header" id="app-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <div class="header-logo">
+                    <svg width="32" height="32" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#FFE600"/><path d="M12 28V12h4l6 10 6-10h4v16h-4V18l-6 10-6-10v10h-4z" fill="#121212"/></svg>
+                    <span class="header-logo-text">AICG</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-breadcrumb" id="header-breadcrumb">
+                    <span>Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="autosave-indicator" id="autosave-indicator">
+                    <span class="autosave-dot"></span>
+                    <span class="autosave-text">All changes saved</span>
+                </div>
+                <div class="header-search-wrap">
+                    <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" class="header-search" placeholder="Search anything..." id="global-search">
+                </div>
+                <button class="header-icon-btn" id="header-notifications" aria-label="Notifications">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="header-user" id="header-user">
+                    <div class="header-avatar">JS</div>
+                    <div class="header-user-info">
+                        <span class="header-user-name" id="header-user-name">Jane Smith</span>
+                        <span class="header-user-role" id="header-user-role">Administrator</span>
+                    </div>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <!-- User dropdown -->
+                <div class="user-dropdown hidden" id="user-dropdown">
+                    <div class="user-dropdown-header">
+                        <div class="header-avatar">JS</div>
+                        <div>
+                            <div class="user-dropdown-name" id="dropdown-user-name">Jane Smith</div>
+                            <div class="user-dropdown-email" id="dropdown-user-email">jane@acme.com</div>
+                        </div>
+                    </div>
+                    <div class="user-dropdown-divider"></div>
+                    <a href="#" class="user-dropdown-item" data-page="profile">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Profile
+                    </a>
+                    <a href="#" class="user-dropdown-item" data-page="settings">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                        Settings
+                    </a>
+                    <div class="user-dropdown-divider"></div>
+                    <a href="#" class="user-dropdown-item user-dropdown-item-danger" id="btn-logout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- SIDEBAR -->
+        <aside class="app-sidebar" id="app-sidebar">
+            <nav class="sidebar-nav">
+                <ul class="sidebar-menu" id="sidebar-menu">
+                    <li>
+                        <a href="#" class="sidebar-link active" data-page="dashboard">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="new-project">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                            <span>New Project</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="projects">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+                            <span>Ongoing Projects</span>
+                            <span class="sidebar-badge" id="projects-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="reviewed-projects">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                            <span>Reviewed Projects</span>
+                            <span class="sidebar-badge" id="reviewed-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="assessment">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            <span>A-Z Assessment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="questionnaire">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+                            <span>Compliance Questionnaire</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="vault">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                            <span>Private Document Vault</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-divider"></li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="profile">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sidebar-link" data-page="settings">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                            <span>Settings</span>
+                        </a>
+                    <li id="sidebar-item-fw-manager" style="display:none;">
+                        <a href="#" class="sidebar-link" data-page="framework-manager">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                            <span>Framework Manager</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-divider"></li>
+                    <li>
+                        <a href="#" class="sidebar-link sidebar-link-logout" id="sidebar-logout">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Sidebar Add Auditee Panel (only visible on assessment views when an active project is selected) -->
+            <div class="sidebar-widget" id="add-auditee-widget" style="display: none; padding: var(--space-md); border-top: 1px solid var(--border); background: var(--bg-elevated);">
+                <div class="widget-title" style="font-size: var(--caption); font-weight: 700; text-transform: uppercase; color: var(--brand); margin-bottom: var(--space-sm); letter-spacing: 0.05em;">Add Auditee</div>
+                <div class="widget-content">
+                    <p class="widget-desc" style="font-size: var(--caption); color: var(--text-tertiary); margin-bottom: var(--space-sm); line-height: 1.4;">Associate a registered auditee with the active project.</p>
+                    <div class="search-form-group" style="display: flex; gap: var(--space-xs); margin-bottom: var(--space-sm);">
+                        <input type="text" id="auditee-search-input" class="form-input search-input" placeholder="Search by name..." style="flex: 1; padding: 6px 10px; font-size: var(--caption); border: 1px solid var(--border); border-radius: 4px; background: var(--bg-base); color: var(--text-primary); outline: none;">
+                        <button class="btn btn-primary btn-sm" id="btn-search-auditee" style="padding: 6px 12px; font-size: var(--caption);">Search</button>
+                    </div>
+                    <div id="auditee-search-results" class="search-results-box" style="display: none; background: var(--bg-base); border: 1px solid var(--border); border-radius: 4px; max-height: 150px; overflow-y: auto;">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-version">v2.4.0</div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="app-main" id="app-main">
+
+            <!-- ===================== PROJECT STEPPER & WIZARD FLOW ===================== -->
+            <div id="project-stepper" class="project-stepper" style="display: none; margin-bottom: 2rem;">
+                <div class="step active" data-step="1">
+                    <div class="step-icon">1</div>
+                    <div class="step-label">Overview</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2">
+                    <div class="step-icon">2</div>
+                    <div class="step-label">Auditee Info</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3">
+                    <div class="step-icon">3</div>
+                    <div class="step-label">Documents</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="4">
+                    <div class="step-icon">4</div>
+                    <div class="step-label">A-Z Assessment</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="5">
+                    <div class="step-icon">5</div>
+                    <div class="step-label">Compliance</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="6">
+                    <div class="step-icon">6</div>
+                    <div class="step-label">Auditor Review</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="7">
+                    <div class="step-icon">7</div>
+                    <div class="step-label">Dashboard</div>
+                </div>
+            </div>
+
+            <!-- Draft Resume Banner -->
+            <div class="draft-resume-banner" id="draft-resume-banner" style="display: none;">
+                <span>⚠️ You have an unsaved project draft (Case ID: <span id="draft-banner-case-id"></span>).</span>
+                <button class="btn btn-primary btn-sm" id="btn-resume-draft">Resume Draft</button>
+            </div>
+
+            <!-- ========== PROJECT DETAIL VIEW (Wizard Steps 1, 2, 3) ========== -->
+            <section id="project-detail-view" class="page hidden">
+                <div class="card detail-card">
+                    <div class="detail-header">
+                        <div>
+                            <h2 id="det-title" class="card-title" style="font-size: var(--h2);">Project Title</h2>
+                            <div class="case-id-badge" style="margin-top: 0.5rem; display: inline-block; padding: 4px 8px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 4px; font-size: var(--caption);">Case ID: <span id="det-case-id"></span></div>
+                        </div>
+                        <span class="status-badge draft" id="det-status-badge">Draft</span>
+                    </div>
+                    
+                    <!-- Subview 1: Project Overview (Step 1) -->
+                    <div id="project-overview-subview" style="display: none; margin-top: 1.5rem;">
+                        <div class="detail-section" style="margin-bottom: 2rem;">
+                            <h4 style="font-size: var(--body); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Project Description</h4>
+                            <p id="det-desc" class="desc-text" style="color: var(--text-secondary); line-height: 1.6; font-size: var(--small);"></p>
+                        </div>
+                        <div class="wizard-footer-nav">
+                            <button class="btn btn-outline" id="btn-overview-back">⬅️ Back to Projects</button>
+                            <div></div>
+                            <button class="btn btn-primary" id="btn-overview-next">Next (Auditee Info) ➡️</button>
+                        </div>
+                    </div>
+
+                    <!-- Subview 2: Auditee Information (Step 2) -->
+                    <div id="project-auditee-subview" style="display: none; margin-top: 1.5rem;">
+                        <div class="detail-section" style="margin-bottom: 2rem;">
+                            <h4 style="font-size: var(--body); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Auditee Profile Summary</h4>
+                            <div class="profile-summary-box" id="det-auditee-profile" style="margin-top: 1rem;">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                        <div class="wizard-footer-nav">
+                            <button class="btn btn-outline" id="btn-auditee-prev">⬅️ Previous (Overview)</button>
+                            <div></div>
+                            <button class="btn btn-primary" id="btn-auditee-next">Next (Documents) ➡️</button>
+                        </div>
+                    </div>
+
+                    <!-- Subview 3: Evidence Documents (Step 3) -->
+                    <div id="project-documents-subview" style="display: none; margin-top: 1.5rem;">
+                        <div class="detail-grid-row">
+                            <div class="detail-column">
+                                <h4 style="font-size: var(--body); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Uploaded Evidence Documents</h4>
+                                <div class="documents-list-box" id="det-uploaded-docs" style="margin-top: 1rem;">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+                            <div class="detail-column" id="detail-upload-container">
+                                <h4 style="font-size: var(--body); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Upload Evidence Document</h4>
+                                <p class="section-desc" style="color: var(--text-tertiary); font-size: var(--caption); margin-bottom: 1rem;">Upload compliance files specifically for this project.</p>
+                                <div class="upload-controls" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                                    <select id="detail-upload-framework" class="form-input form-select" style="width: 100%;">
+                                        <option value="EU AI Act">EU AI Act</option>
+                                        <option value="NIST AI RMF">NIST AI RMF</option>
+                                        <option value="DPDP">DPDP</option>
+                                        <option value="MeitY Guidelines">MeitY Guidelines</option>
+                                        <option value="ISO 42001">ISO 42001</option>
+                                    </select>
+                                    <div class="file-input-wrapper" style="display: flex; align-items: center; gap: var(--space-sm);">
+                                        <input type="file" id="detail-file-uploader" class="file-input-hidden" style="display: none;">
+                                        <button type="button" class="btn btn-outline btn-sm" id="btn-choose-detail-file">Choose File...</button>
+                                        <span id="detail-selected-filename" class="selected-filename-text">No file chosen</span>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-sm" id="btn-upload-project-file">Upload to Project</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wizard-footer-nav">
+                            <button class="btn btn-outline" id="btn-docs-prev">⬅️ Previous (Auditee Info)</button>
+                            <div class="wizard-nav-actions" id="det-actions-container"></div>
+                            <button class="btn btn-primary" id="btn-docs-next">Next (A-Z Assessment) ➡️</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== AUDITOR REVIEW & CONCLUSION (Wizard Step 6) ========== -->
+            <section id="page-auditor-review" class="page hidden">
+                <div class="card detail-card">
+                    <div class="detail-header">
+                        <div>
+                            <h2 style="font-size: var(--h2);">Auditor Conclusion &amp; Review</h2>
+                            <div class="case-id-badge" style="margin-top: 0.5rem; display: inline-block; padding: 4px 8px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 4px; font-size: var(--caption);">Case ID: <span id="rev-case-id"></span></div>
+                        </div>
+                        <span class="status-badge draft" id="rev-status-badge">Under Assessment</span>
+                    </div>
+                    
+                    <!-- Evaluation Statistics Card -->
+                    <div class="review-stats-container" style="margin-bottom: 2rem; margin-top: 1.5rem;">
+                        <h4 style="font-size: var(--body); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Evaluation Summary</h4>
+                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                            <div class="stat-card bg-primary-glow" style="background: var(--bg-elevated); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--brand); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="font-size: var(--caption); color: var(--text-secondary);">A-Z Questions Checked</div>
+                                <div id="rev-az-stats" style="font-size: 1.5rem; font-weight: 700; margin-top: 0.25rem; color: var(--text-primary);">0 / 78</div>
+                            </div>
+                            <div class="stat-card bg-success-glow" style="background: var(--bg-elevated); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--semantic-green); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="font-size: var(--caption); color: var(--text-secondary);">Compliance Questions Checked</div>
+                                <div id="rev-comp-stats" style="font-size: 1.5rem; font-weight: 700; margin-top: 0.25rem; color: var(--text-primary);">0 / 42</div>
+                            </div>
+                            <div class="stat-card bg-info-glow" style="background: var(--bg-elevated); padding: 1.25rem; border-radius: 6px; border-left: 4px solid var(--semantic-blue); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                                <div style="font-size: var(--caption); color: var(--text-secondary);">Total Documents Uploaded</div>
+                                <div id="rev-docs-count" style="font-size: 1.5rem; font-weight: 700; margin-top: 0.25rem; color: var(--text-primary);">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auditor Notes & Conclusion Textarea -->
+                    <div class="detail-section" style="margin-bottom: 2rem;">
+                        <h4 style="font-size: var(--body); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Auditor Conclusion Notes</h4>
+                        <p class="section-desc" style="color: var(--text-tertiary); font-size: var(--caption); margin-bottom: 1rem;">Enter final observations, findings, and notes for the compliance report.</p>
+                        <textarea id="rev-auditor-notes" class="form-input form-textarea" rows="6" placeholder="Enter conclusion notes..." style="width: 100%; box-sizing: border-box;"></textarea>
+                        <div style="margin-top: 0.75rem; display: flex; justify-content: flex-end;">
+                            <button class="btn btn-outline btn-sm" id="btn-save-notes">Save Notes</button>
+                        </div>
+                    </div>
+
+                    <!-- Auditor Review Actions -->
+                    <div class="wizard-footer-nav" style="margin-top: 2rem;">
+                        <button class="btn btn-outline" id="btn-review-prev">⬅️ Previous (Compliance)</button>
+                        <div class="wizard-nav-actions" style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-success" id="btn-rev-generate-report">Generate Report</button>
+                        </div>
+                        <button class="btn btn-primary" id="btn-review-next">Next (Dashboard) ➡️</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== COMPLIANCE DASHBOARD (Wizard Step 7) ========== -->
+            <section id="page-compliance-dashboard" class="page hidden">
+                <div class="dashboard-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h2 id="dash-project-title" style="font-size: var(--h1); font-weight: 700;">AI Compliance Dashboard</h2>
+                        <div class="case-id-badge" style="margin-top: 0.25rem; display: inline-block; padding: 4px 8px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 4px; font-size: var(--caption);">Case ID: <span id="dash-case-id"></span></div>
+                    </div>
+                    <div id="dash-action-buttons">
+                        <!-- Toggled dynamically -->
+                    </div>
+                </div>
+
+                <!-- Exact 4-tile Metrics Grid -->
+                <div class="dashboard-metrics-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+                    <div class="metric-card bg-primary-glow" style="background: var(--bg-elevated); padding: 1.75rem; border-radius: 8px; border-left: 4px solid var(--brand); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                        <div class="metric-title" style="font-size: var(--caption); font-weight: 600; color: var(--text-tertiary); text-transform: uppercase;">Total Questions</div>
+                        <div class="metric-value" id="dash-total-questions" style="font-size: 3rem; font-weight: 700; color: var(--brand); margin-bottom: 0.5rem;">120</div>
+                        <div class="metric-subtitle" style="font-size: var(--caption); color: var(--text-tertiary);">A-Z Checklist &amp; Compliance Frameworks</div>
+                    </div>
+                    <div class="metric-card bg-success-glow" style="background: var(--bg-elevated); padding: 1.75rem; border-radius: 8px; border-left: 4px solid var(--semantic-green); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                        <div class="metric-title" style="font-size: var(--caption); font-weight: 600; color: var(--text-tertiary); text-transform: uppercase;">Submitted</div>
+                        <div class="metric-value" id="dash-submitted-questions" style="font-size: 3rem; font-weight: 700; color: var(--semantic-green); margin-bottom: 0.5rem;">0</div>
+                        <div class="metric-subtitle" style="font-size: var(--caption); color: var(--text-tertiary);">Evaluated (Pass / Fail / N/A) in submitted sections</div>
+                    </div>
+                    <div class="metric-card bg-warning-glow" style="background: var(--bg-elevated); padding: 1.75rem; border-radius: 8px; border-left: 4px solid var(--semantic-amber); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                        <div class="metric-title" style="font-size: var(--caption); font-weight: 600; color: var(--text-tertiary); text-transform: uppercase;">Saved to Draft</div>
+                        <div class="metric-value" id="dash-draft-questions" style="font-size: 3rem; font-weight: 700; color: var(--semantic-amber); margin-bottom: 0.5rem;">0</div>
+                        <div class="metric-subtitle" style="font-size: var(--caption); color: var(--text-tertiary);">Answers currently in draft mode</div>
+                    </div>
+                    <div class="metric-card bg-info-glow" style="background: var(--bg-elevated); padding: 1.75rem; border-radius: 8px; border-left: 4px solid var(--semantic-blue); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+                        <div class="metric-title" style="font-size: var(--caption); font-weight: 600; color: var(--text-tertiary); text-transform: uppercase;">Unanswered</div>
+                        <div class="metric-value" id="dash-unanswered-questions" style="font-size: 3rem; font-weight: 700; color: var(--semantic-blue); margin-bottom: 0.5rem;">0</div>
+                        <div class="metric-subtitle" style="font-size: var(--caption); color: var(--text-tertiary);">Questions requiring evaluation or doc uploads</div>
+                    </div>
+                </div>
+                
+                <!-- Bottom Action Buttons (e.g. Delete) -->
+                <div id="dash-bottom-actions" style="margin-top: 3rem; display: flex; justify-content: flex-end;">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- ========== DASHBOARD ========== -->
+            <section id="page-dashboard" class="page active">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Dashboard</h1>
+                        <p class="page-subtitle">Compliance overview and project status at a glance</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <button class="btn btn-outline" id="dash-download-report">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download Report
+                        </button>
+                        <button class="btn btn-primary" id="dash-new-project">New Project</button>
+                    </div>
+                </div>
+
+                <!-- KPI Row -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon kpi-icon-total">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="kpi-total">248</span>
+                            <span class="kpi-label">Total Questions</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon kpi-icon-submitted">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="kpi-submitted">142</span>
+                            <span class="kpi-label">Submitted</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon kpi-icon-draft">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="kpi-draft">64</span>
+                            <span class="kpi-label">Saved to Draft</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon kpi-icon-unanswered">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="kpi-unanswered">42</span>
+                            <span class="kpi-label">Unanswered</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Tiles removed -->
+
+                <!-- Project Summary + Recent Activity -->
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Project Summary</h2>
+                            <a href="#" class="card-link" data-page="projects">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="project-list" id="dash-project-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Recent Activity</h2>
+                            <button class="btn btn-ghost btn-sm">View Log</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-list" id="dash-activity-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Framework Overview removed -->
+            </section>
+
+            <!-- ========== NEW PROJECT ========== -->
+            <section id="page-new-project" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">New Project</h1>
+                        <p class="page-subtitle">Initiate a new compliance assessment project</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form id="new-project-form" class="auth-form" novalidate>
+                            <div class="form-section-title">Project Details</div>
+                            <div class="form-row-2col">
+                                <div class="form-group">
+                                    <label class="form-label" for="proj-case-id">Case ID</label>
+                                    <input type="text" id="proj-case-id" class="form-input" placeholder="Auto-generated" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="proj-name">Project Name</label>
+                                    <input type="text" id="proj-name" class="form-input" placeholder="e.g. AI Governance Audit - Q3 2026" required>
+                                    <span class="form-error" id="proj-name-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-row-2col">
+                                <div class="form-group">
+                                    <label class="form-label" for="proj-domain">Domain</label>
+                                    <select id="proj-domain" class="form-input form-select" required>
+                                        <option value="">Select Domain</option>
+                                        <option>Financial Services</option>
+                                        <option>Healthcare</option>
+                                        <option>Technology</option>
+                                        <option>Government</option>
+                                        <option>Telecom</option>
+                                        <option>Manufacturing</option>
+                                        <option>Education</option>
+                                        <option>Retail &amp; E-Commerce</option>
+                                    </select>
+                                    <span class="form-error" id="proj-domain-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="proj-owner">Project Owner</label>
+                                    <input type="text" id="proj-owner" class="form-input" value="Jane Smith" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="proj-desc">Description</label>
+                                <textarea id="proj-desc" class="form-input form-textarea" rows="3" placeholder="Describe the scope and objectives of this compliance assessment..."></textarea>
+                            </div>
+
+                            <div class="form-section-title">Framework Selection</div>
+                            <div class="framework-select-grid">
+                                <label class="framework-select-card">
+                                    <input type="checkbox" class="framework-checkbox" value="eu-ai-act" checked>
+                                    <div class="framework-select-card-inner">
+                                        <div class="framework-select-icon">EU</div>
+                                        <div class="framework-select-info">
+                                            <span class="framework-select-name">EU AI Act</span>
+                                            <span class="framework-select-desc">European Union Artificial Intelligence Regulation</span>
+                                        </div>
+                                        <svg class="framework-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+                                <label class="framework-select-card">
+                                    <input type="checkbox" class="framework-checkbox" value="nist-ai-rmf">
+                                    <div class="framework-select-card-inner">
+                                        <div class="framework-select-icon">NIST</div>
+                                        <div class="framework-select-info">
+                                            <span class="framework-select-name">NIST AI RMF</span>
+                                            <span class="framework-select-desc">AI Risk Management Framework</span>
+                                        </div>
+                                        <svg class="framework-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+                                <label class="framework-select-card">
+                                    <input type="checkbox" class="framework-checkbox" value="iso-42001">
+                                    <div class="framework-select-card-inner">
+                                        <div class="framework-select-icon">ISO</div>
+                                        <div class="framework-select-info">
+                                            <span class="framework-select-name">ISO 42001</span>
+                                            <span class="framework-select-desc">AI Management System Standard</span>
+                                        </div>
+                                        <svg class="framework-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+                                <label class="framework-select-card">
+                                    <input type="checkbox" class="framework-checkbox" value="dpdp">
+                                    <div class="framework-select-card-inner">
+                                        <div class="framework-select-icon">DPDP</div>
+                                        <div class="framework-select-info">
+                                            <span class="framework-select-name">DPDP Act</span>
+                                            <span class="framework-select-desc">Digital Personal Data Protection Act</span>
+                                        </div>
+                                        <svg class="framework-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+                                <label class="framework-select-card">
+                                    <input type="checkbox" class="framework-checkbox" value="meity">
+                                    <div class="framework-select-card-inner">
+                                        <div class="framework-select-icon">MeitY</div>
+                                        <div class="framework-select-info">
+                                            <span class="framework-select-name">MeitY Guidelines</span>
+                                            <span class="framework-select-desc">Ministry of Electronics &amp; IT AI Advisory</span>
+                                        </div>
+                                        <svg class="framework-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE600" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="form-section-title">Document Upload</div>
+                            <div class="upload-zone" id="proj-upload-zone">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                <p class="upload-text">Drag &amp; drop documents here or <span class="upload-browse">browse</span></p>
+                                <p class="upload-hint">PDF, DOCX, XLSX, PNG, JPG up to 25MB each</p>
+                                <input type="file" id="proj-file-input" multiple accept=".pdf,.docx,.xlsx,.png,.jpg,.jpeg" class="upload-input-hidden">
+                            </div>
+                            <div class="upload-file-list" id="proj-file-list"></div>
+
+                            <div class="form-row form-row-end" style="margin-top:24px">
+                                <button type="button" class="btn btn-outline" id="proj-draft">Save Draft</button>
+                                <button type="submit" class="btn btn-primary">Create Project</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== ONGOING PROJECTS ========== -->
+            <section id="page-projects" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Ongoing Projects</h1>
+                        <p class="page-subtitle">Track all active compliance assessment projects</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <div class="filter-bar">
+                            <div class="filter-group">
+                                <label class="filter-label">Status</label>
+                                <select class="filter-select" id="filter-status">
+                                    <option value="all">All Statuses</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="review">Under Review</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label">Framework</label>
+                                <select class="filter-select" id="filter-framework">
+                                    <option value="all">All Frameworks</option>
+                                    <option value="eu-ai-act">EU AI Act</option>
+                                    <option value="nist-ai-rmf">NIST AI RMF</option>
+                                    <option value="iso-42001">ISO 42001</option>
+                                    <option value="dpdp">DPDP Act</option>
+                                    <option value="meity">MeitY</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="projects-new-btn">New Project</button>
+                    </div>
+                </div>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- ========== REVIEWED PROJECTS ========== -->
+            <section id="page-reviewed-projects" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Reviewed Projects</h1>
+                        <p class="page-subtitle">Projects that have been reviewed and finalized</p>
+                    </div>
+                </div>
+                <div class="projects-grid" id="reviewed-projects-grid"></div>
+            </section>
+
+            <!-- ========== A-Z ASSESSMENT ========== -->
+            <section id="page-assessment" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">A-Z Assessment</h1>
+                        <p class="page-subtitle">Systematic question-by-question assessment workspace</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <div class="assessment-overall-progress">
+                            <span class="assessment-progress-label">Overall</span>
+                            <div class="progress-bar progress-bar-sm" style="width:160px">
+                                <div class="progress-fill" id="az-overall-bar" style="width:0%"></div>
+                            </div>
+                            <span class="assessment-progress-pct" id="az-overall-pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="assessment-layout">
+                    <!-- Left: A-Z Nav -->
+                    <div class="az-nav" id="az-nav">
+                        <div class="az-nav-header">
+                            <span class="az-nav-title">Sections</span>
+                            <span class="az-nav-count" id="az-nav-count">0 / 0</span>
+                        </div>
+                        <div class="az-nav-list" id="az-nav-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <!-- Right: Question Workspace -->
+                    <div class="az-workspace" id="az-workspace">
+                        <div class="az-question-placeholder">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3A3A3A" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            <p>Select a section from the navigation to begin assessment</p>
+                        </div>
+                        <div class="az-questions-container hidden" id="az-questions-container">
+                            <!-- Question cards populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== COMPLIANCE QUESTIONNAIRE ========== -->
+            <section id="page-questionnaire" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Compliance Questionnaire</h1>
+                        <p class="page-subtitle">Framework-specific compliance assessment questionnaires</p>
+                    </div>
+                </div>
+                <!-- Framework Tabs -->
+                <div class="tabs" id="q-tabs">
+                    <button class="tab active" data-tab="tab-eu-ai-act">EU AI Act</button>
+                    <button class="tab" data-tab="tab-nist-ai-rmf">NIST AI RMF</button>
+                    <button class="tab" data-tab="tab-dpdp">DPDP Act</button>
+                    <button class="tab" data-tab="tab-meity">MeitY</button>
+                    <button class="tab" data-tab="tab-iso-42001">ISO 42001</button>
+                </div>
+
+                <!-- EU AI Act -->
+                <div class="tab-content active" id="tab-eu-ai-act">
+                    <div class="questionnaire-progress-bar">
+                        <div class="progress-bar"><div class="progress-fill" id="qprogress-eu" style="width:0%"></div></div>
+                        <span class="questionnaire-progress-text" id="qprogress-eu-text">0 of 0 answered</span>
+                    </div>
+                    <div id="accordion-eu-ai-act" class="accordion">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- NIST AI RMF -->
+                <div class="tab-content" id="tab-nist-ai-rmf">
+                    <div class="questionnaire-progress-bar">
+                        <div class="progress-bar"><div class="progress-fill" id="qprogress-nist" style="width:0%"></div></div>
+                        <span class="questionnaire-progress-text" id="qprogress-nist-text">0 of 0 answered</span>
+                    </div>
+                    <div id="accordion-nist-ai-rmf" class="accordion">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- DPDP -->
+                <div class="tab-content" id="tab-dpdp">
+                    <div class="questionnaire-progress-bar">
+                        <div class="progress-bar"><div class="progress-fill" id="qprogress-dpdp" style="width:0%"></div></div>
+                        <span class="questionnaire-progress-text" id="qprogress-dpdp-text">0 of 0 answered</span>
+                    </div>
+                    <div id="accordion-dpdp" class="accordion">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- MeitY -->
+                <div class="tab-content" id="tab-meity">
+                    <div class="questionnaire-progress-bar">
+                        <div class="progress-bar"><div class="progress-fill" id="qprogress-meity" style="width:0%"></div></div>
+                        <span class="questionnaire-progress-text" id="qprogress-meity-text">0 of 0 answered</span>
+                    </div>
+                    <div id="accordion-meity" class="accordion">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- ISO 42001 -->
+                <div class="tab-content" id="tab-iso-42001">
+                    <div class="questionnaire-progress-bar">
+                        <div class="progress-bar"><div class="progress-fill" id="qprogress-iso" style="width:0%"></div></div>
+                        <span class="questionnaire-progress-text" id="qprogress-iso-text">0 of 0 answered</span>
+                    </div>
+                    <div id="accordion-iso-42001" class="accordion">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== DOCUMENT VAULT ========== -->
+            <section id="page-vault" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Private Document Vault</h1>
+                        <p class="page-subtitle">Secure enterprise document management center</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <button class="btn btn-outline" id="vault-upload-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            Upload
+                        </button>
+                    </div>
+                </div>
+                <div class="vault-toolbar">
+                    <div class="vault-search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" class="vault-search-input" placeholder="Search documents..." id="vault-search-input">
+                    </div>
+                    <div class="vault-filters">
+                        <select class="filter-select" id="vault-filter-type">
+                            <option value="all">All Types</option>
+                            <option value="pdf">PDF</option>
+                            <option value="docx">DOCX</option>
+                            <option value="xlsx">XLSX</option>
+                            <option value="image">Images</option>
+                        </select>
+                        <select class="filter-select" id="vault-filter-framework">
+                            <option value="all">All Frameworks</option>
+                            <option value="eu-ai-act">EU AI Act</option>
+                            <option value="nist-ai-rmf">NIST AI RMF</option>
+                            <option value="iso-42001">ISO 42001</option>
+                            <option value="dpdp">DPDP</option>
+                            <option value="meity">MeitY</option>
+                        </select>
+                        <select class="filter-select" id="vault-sort">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="name-asc">Name A-Z</option>
+                            <option value="name-desc">Name Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="vault-table-wrap">
+                    <table class="data-table" id="vault-table">
+                        <thead>
+                            <tr>
+                                <th class="th-checkbox"><input type="checkbox" class="checkbox-input" id="vault-select-all"></th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Framework Tag</th>
+                                <th>Size</th>
+                                <th>Uploaded</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vault-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="vault-upload-zone hidden" id="vault-upload-zone">
+                    <div class="upload-zone">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <p class="upload-text">Drag &amp; drop files or <span class="upload-browse">browse</span></p>
+                        <p class="upload-hint">PDF, DOCX, XLSX, PNG, JPG up to 25MB each</p>
+                        <input type="file" id="vault-file-input" multiple accept=".pdf,.docx,.xlsx,.png,.jpg,.jpeg" class="upload-input-hidden">
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== PROFILE ========== -->
+            <section id="page-profile" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Profile</h1>
+                        <p class="page-subtitle">Manage your account information and preferences</p>
+                    </div>
+                </div>
+                <div class="profile-grid">
+                    <div class="card">
+                        <div class="card-body profile-avatar-section">
+                            <div class="profile-avatar-large">JS</div>
+                            <h2 class="profile-name" id="profile-name">Jane Smith</h2>
+                            <p class="profile-role" id="profile-role">Administrator</p>
+                            <p class="profile-org" id="profile-org">Acme Corporation</p>
+                            <button class="btn btn-outline btn-sm" id="profile-edit-btn">Edit Profile</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Account Details</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-detail-grid" id="profile-details">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== SETTINGS ========== -->
+            <section id="page-settings" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Settings</h1>
+                        <p class="page-subtitle">Configure platform preferences and notification settings</p>
+                    </div>
+                </div>
+                <div class="settings-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">General Settings</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">Autosave</span>
+                                    <span class="settings-item-desc">Automatically save draft responses every 30 seconds</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">Email Notifications</span>
+                                    <span class="settings-item-desc">Receive email alerts for project updates and deadlines</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">In-App Notifications</span>
+                                    <span class="settings-item-desc">Show notification badges and alerts within the platform</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">Two-Factor Authentication</span>
+                                    <span class="settings-item-desc">Add an extra layer of security to your account</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Data &amp; Privacy</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">Audit Trail Logging</span>
+                                    <span class="settings-item-desc">Log all user actions for compliance audit purposes</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">Data Retention Period</span>
+                                    <span class="settings-item-desc">Duration to retain completed assessment data</span>
+                                </div>
+                                <select class="filter-select" style="width:140px">
+                                    <option>1 Year</option>
+                                    <option>3 Years</option>
+                                    <option selected>5 Years</option>
+                                    <option>Indefinite</option>
+                                </select>
+                            </div>
+                            <div class="settings-item">
+                                <div class="settings-item-info">
+                                    <span class="settings-item-label">Export All Data</span>
+                                    <span class="settings-item-desc">Download a complete archive of your platform data</span>
+                                </div>
+                                <button class="btn btn-outline btn-sm">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ========== FRAMEWORK MANAGER ========== -->
+            <section id="page-framework-manager" class="page hidden">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">⚙️ Framework Manager</h1>
+                        <p class="page-subtitle">Upload a PDF to extract AI questions, or edit frameworks manually.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="padding:2rem;">
+                    <!-- Tabs -->
+                    <div class="fw-tabs" style="margin-bottom: 2rem;">
+                        <button class="fw-tab active" id="fw-tab-az" onclick="renderFwAZTab()">📋 A-Z Framework</button>
+                        <button class="fw-tab" id="fw-tab-comp" onclick="renderFwCompTab()">📊 Compliance Frameworks</button>
+                    </div>
+
+                    <!-- A-Z Panel -->
+                    <div id="fw-panel-az">
+                        <!-- PDF Upload Card -->
+                        <div class="fw-upload-card" style="margin-bottom: 2rem;">
+                            <h4>🤖 Upload PDF to Generate A-Z Questions</h4>
+                            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">Upload a standards document or technical policy PDF. Gemini AI will analyze the text and extract custom questions.</p>
+                            <div class="fw-upload-row">
+                                <input type="file" id="fw-pdf-input-az" accept=".pdf" class="fw-file-input" />
+                                <select id="fw-section-hint-az" class="filter-select fw-section-select" style="min-width:180px;">
+                                    <option value="auto">Auto-detect sections</option>
+                                    <option value="A">Section A — Access Control</option>
+                                    <option value="B">Section B — Bandwidth</option>
+                                    <option value="C">Section C — Cybersecurity</option>
+                                    <option value="D">Section D — Data Integrity</option>
+                                    <option value="E">Section E — Explainability</option>
+                                    <option value="F">Section F — Fairness</option>
+                                    <option value="G">Section G — Governance</option>
+                                    <option value="H">Section H — Human Oversight</option>
+                                    <option value="I">Section I — Incident Response</option>
+                                    <option value="J">Section J — Jurisdiction</option>
+                                    <option value="K">Section K — Knowledge Management</option>
+                                    <option value="L">Section L — Logging</option>
+                                    <option value="M">Section M — Model Validation</option>
+                                    <option value="N">Section N — Network Security</option>
+                                    <option value="O">Section O — Operational Risk</option>
+                                    <option value="P">Section P — Privacy</option>
+                                    <option value="Q">Section Q — Quality Assurance</option>
+                                    <option value="R">Section R — Risk Management</option>
+                                    <option value="S">Section S — Supply Chain</option>
+                                    <option value="T">Section T — Testing</option>
+                                    <option value="U">Section U — User Consent</option>
+                                    <option value="V">Section V — Vulnerability Management</option>
+                                    <option value="W">Section W — Workforce Training</option>
+                                    <option value="X">Section X — External Auditing</option>
+                                    <option value="Y">Section Y — Year-over-Year Review</option>
+                                    <option value="Z">Section Z — Zero Trust Architecture</option>
+                                </select>
+                                <button class="btn btn-primary" onclick="fwUploadAndAnalyze('az')">🔍 Analyze PDF</button>
+                            </div>
+                            <div id="fw-analyze-status-az" style="margin-top:0.75rem;"></div>
+                            <div id="fw-preview-az" style="margin-top:1rem;"></div>
+                        </div>
+
+                        <!-- Current Questions -->
+                        <div class="fw-questions-panel">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+                                <h3 style="margin:0;">Current A-Z Questions</h3>
+                                <button class="btn btn-secondary btn-sm" onclick="fwResetToDefaults('az')">↩ Reset to Defaults</button>
+                            </div>
+                            <div id="fw-az-questions-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Compliance Panel -->
+                    <div id="fw-panel-comp" style="display:none;">
+                        <!-- PDF Upload Card -->
+                        <div class="fw-upload-card" style="margin-bottom: 2rem;">
+                            <h4>🤖 Upload PDF to Generate Compliance Questions</h4>
+                            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">Upload a regulation, act, or guideline PDF. Gemini AI will extract custom audit questions.</p>
+                            <div class="fw-upload-row">
+                                <input type="file" id="fw-pdf-input-comp" accept=".pdf" class="fw-file-input" />
+                                <select id="fw-section-hint-comp" class="filter-select fw-section-select" style="min-width:180px;">
+                                    <option value="auto">Auto-detect framework</option>
+                                    <option value="Section 1 — EU AI Act">Section 1 — EU AI Act</option>
+                                    <option value="Section 2 — NIST AI RMF">Section 2 — NIST AI RMF</option>
+                                    <option value="Section 3 — DPDP">Section 3 — DPDP</option>
+                                    <option value="Section 4 — MeitY Guidelines">Section 4 — MeitY Guidelines</option>
+                                    <option value="Section 5 — ISO 42001">Section 5 — ISO 42001</option>
+                                </select>
+                                <button class="btn btn-primary" onclick="fwUploadAndAnalyze('comp')">🔍 Analyze PDF</button>
+                            </div>
+                            <div id="fw-analyze-status-comp" style="margin-top:0.75rem;"></div>
+                            <div id="fw-preview-comp" style="margin-top:1rem;"></div>
+                        </div>
+
+                        <!-- Current Questions -->
+                        <div class="fw-questions-panel">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+                                <h3 style="margin:0;">Current Compliance Questions</h3>
+                                <button class="btn btn-secondary btn-sm" onclick="fwResetToDefaults('comp')">↩ Reset to Defaults</button>
+                            </div>
+                            <div id="fw-comp-questions-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Core Script Imports -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="data/questions.js"></script>
+    <script src="modules/supabase.js"></script>
+    <script src="modules/pdf-generator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
