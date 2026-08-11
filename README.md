@@ -877,3 +877,46 @@ further engineering.
 | **LLM Validation** | LLM-generated content still requires human verification and review. |
 | **Access Control** | Additional enterprise-grade RBAC and organizational isolation would be required for broader production deployment. |
 | **Continuous Monitoring** | The current workflow focuses on assessment rather than continuous AI-system monitoring. |
+
+
+---
+
+## 🎯 Project Summary
+
+AICG started from a simple question:
+
+> **How can AI governance assessments become more structured, traceable,
+> and easier to work with?**
+
+The result is a full-stack platform that brings together:
+
+- **LLM-assisted framework analysis**
+- **Structured A–Z governance assessment**
+- **Evidence and document workflows**
+- **Human-in-the-loop review**
+- **Persistent assessment data**
+- **Automated reporting**
+- **Cloud deployment**
+
+The project combines concepts from **AI/ML, data processing, software
+engineering, cybersecurity, and AI governance** into a single working
+application.
+
+### What AICG Demonstrates
+
+```text
+             AI / ML
+                │
+                ▼
+        ┌───────────────┐
+        │     AICG      │
+        └───────┬───────┘
+                │
+       ┌────────┼────────┐
+       ▼        ▼        ▼
+      DATA    SOFTWARE  GOVERNANCE
+       │        │        │
+       └────────┼────────┘
+                ▼
+         RESPONSIBLE AI
+```
