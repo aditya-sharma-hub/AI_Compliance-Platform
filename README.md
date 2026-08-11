@@ -513,7 +513,7 @@ Each assessment begins with a project that defines the AI system,
 assessment context, applicable frameworks, and supporting documentation.
 
 <p align="center">
-  <img src="docs/screenshots/new-project.png" width="88%" alt="AICG New Project">
+  <img src="assets/new project.png" width="88%" alt="AICG New Project">
 </p>
 
 <p align="center">
@@ -528,7 +528,7 @@ The assessment workspace provides a structured control-by-control interface
 for evaluating the AI system across the A–Z governance domains.
 
 <p align="center">
-  <img src="docs/screenshots/az-assessment.png" width="88%" alt="AICG A-Z Assessment">
+  <img src="assets/A-Z.png" width="88%" alt="AICG A-Z Assessment">
 </p>
 
 <p align="center">
@@ -544,7 +544,7 @@ question progress, submitted responses, drafts, unanswered controls, and
 active projects.
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" width="92%" alt="AICG Auditor Dashboard">
+  <img src="assets/dashboard.png" width="92%" alt="AICG Auditor Dashboard">
 </p>
 
 <p align="center">
