@@ -28,7 +28,7 @@
 
 <br>
 
-<img src="docs/screenshots/dashboard.png" width="95%" alt="AICG Auditor Dashboard">
+<img src="assets/banner.png" width="95%" alt="AICG Auditor Dashboard">
 
 <br>
 
@@ -498,7 +498,7 @@ The platform begins with an authenticated workspace, providing controlled
 access to the compliance assessment environment.
 
 <p align="center">
-  <img src="docs/screenshots/sign-in.png" width="88%" alt="AICG Authentication">
+  <img src="assets/sign in.png" width="88%" alt="AICG Authentication">
 </p>
 
 <p align="center">
