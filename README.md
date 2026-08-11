@@ -920,3 +920,24 @@ application.
                 ▼
          RESPONSIBLE AI
 ```
+## 👨‍💻 Author
+
+**Aditya Sharma**  
+
+
+---
+
+## 📄 License
+
+This project is intended for educational and portfolio purposes.  
+Please attribute the author if you reuse or reference this work.
+
+---
+
+## 🔗 Connect
+
+📧 Email: [adityasharmand@gmail.com  ]
+
+💼 LinkedIn: [[Your LinkedIn Profile](https://www.linkedin.com/in/aditya-sharma-2a9b94287/)]  
+
+🐙 GitHub: [[Your GitHub Profile](https://github.com/aditya-sharma-hub)]
